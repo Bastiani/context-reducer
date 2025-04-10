@@ -1,11 +1,11 @@
 import Counter from "./Counter";
-import { CustumerForm } from "./Custumer";
+import { CustomerForm } from "./Customer";
 
 function App() {
   return (
     <>
       <Counter />
-      <CustumerForm />
+      <CustomerForm />
     </>
   );
 }

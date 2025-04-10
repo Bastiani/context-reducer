@@ -1,16 +1,18 @@
-import { useCustumer } from "./context/Custumer";
+import { Customer, useCustomer } from "./context/Customer";
 import { useState } from "react";
 
-export const CustumerForm = () => {
-  const { custumer, setCustumer } = useCustumer();
+export const CustomerForm = () => {
+  const { customer, setCustomer } = useCustomer();
   const [formData, setFormData] = useState({
+    id: "",
     name: "",
     email: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent, formCustomerData: Customer) => {
     e.preventDefault();
-    setCustumer(formData);
+    console.log("Form submitted", formCustomerData, crypto.randomUUID());
+    setCustomer(formCustomerData);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,9 +23,12 @@ export const CustumerForm = () => {
   };
 
   return (
-    <div>
-      <h1>Customer Form</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col">
+    <div className="flex flex-col items-center justify-center h-screen m-5">
+      <h1 className="text-2xl font-bold mb-4">Customer Form</h1>
+      <form
+        onSubmit={(event) => handleSubmit(event, formData)}
+        className="flex flex-col"
+      >
         <input
           type="text"
           name="name"
@@ -44,8 +49,9 @@ export const CustumerForm = () => {
       </form>
       <div>
         <h2>Customer Details</h2>
-        <p>Name: {custumer?.name}</p>
-        <p>Email: {custumer?.email}</p>
+        <p>ID: {customer?.id}</p>
+        <p>Name: {customer?.name}</p>
+        <p>Email: {customer?.email}</p>
       </div>
     </div>
   );
